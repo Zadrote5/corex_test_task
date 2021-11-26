@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=bo%yh(d9i=z%r1k(3%po!=a)8^6w5*nf$#pqjg_(udk=*%atq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'news.apps.NewsConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,8 +50,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
-
+CORS_ALLOWED_ORIGINS = [
+    "http://0.0.0.0:8000",
+]
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -79,12 +84,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
 
-        'ENGINE': ,
-        'NAME': ,
-        'USER': ,
-        'PASSWORD': ,
-        'HOST': ,
-        'PORT': ,
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'corex',
+        'USER': 'postgres',
+        'PASSWORD': 'zadrote5',
+        'HOST': 'localhost',
+        'PORT': 5432,
 
     }
 }
