@@ -85,11 +85,11 @@ DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'corex',
-        'USER': 'postgres',
-        'PASSWORD': 'zadrote5',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'NAME': ,
+        'USER': ,
+        'PASSWORD': ,
+        'HOST': ,
+        'PORT': ,
 
     }
 }
