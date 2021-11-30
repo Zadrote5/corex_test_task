@@ -1,7 +1,7 @@
 <template>
 <div class="n-list-item">
 <n-cart
-v-bind:news="news"
+v-bind:news_id="news_data.id"
 />
 
 

@@ -6,20 +6,20 @@
     <div class="popup-content">
       <div class="popup-top-block">
         <div class="author">
-          <n-author v-bind="name=news"/>
+          <n-author v-bind:author_id="news_data.author"/>
         </div>
         <div class="cities">
-          <n-city v-for="city in news.cities"
+          <n-city v-for="city in news_data.cities"
                   :key="city"
-                  v-bind:city="city"
+                  v-bind:city_id="city"
           />
         </div>
       </div>
       <div class="popup-title">
-        {{news.title }}
+        {{news_data.title }}
       </div>
       <div class="popup-content">
-        {{news.content }}
+        {{news_data.content }}
       </div>
     </div>
   </div>
@@ -29,6 +29,7 @@
 <script>
 import nCity from './n-city'
 import nAuthor from './n-author'
+import axios from "axios";
 export default {
   components: {
     nCity,
@@ -41,17 +42,26 @@ export default {
   },
   name: "n-cart",
   props:{
-    news: {
-      type: Object,
+    news_id: {
+      type: Number,
       default() {
-        return {}
+        return 0
       }
     }
   },
   data() {
     return {
-      news_data: this.news,
+      news_data: {},
     }
+  },
+  mounted() {
+    axios
+        .get('http://0.0.0.0:8000/news/'+ this.news_id, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(response => (this.news_data = response.data));
   },
   computed: {}
 

@@ -14,7 +14,8 @@
     "quasar": "^2.0.0",
     "vue": "^3.0.0",
     "vue-axios": "^3.4.0",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

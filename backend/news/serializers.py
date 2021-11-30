@@ -14,16 +14,6 @@ class CountrySerializer(serializers.ModelSerializer):
         fields = ['name', 'id']
 
 
-class NewsSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(max_length=250)
-    content = serializers.CharField(max_length=1500)
-    is_published = serializers.BooleanField(default=False)
-
-    class Meta:
-        model = News
-        fields = ['title', 'author', 'content', 'is_published', 'cities', 'id']
-
-
 class AuthorSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=250)
     email = serializers.EmailField()
@@ -32,3 +22,21 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['name', 'email', 'id']
+
+
+class NewsSerializer(serializers.ModelSerializer):
+    title = serializers.CharField(max_length=250)
+    content = serializers.CharField(max_length=1500)
+    is_published = serializers.BooleanField(default=False)
+    author = AuthorSerializer(read_only=True)
+    cities = CitySerializer(many=True)
+
+    class Meta:
+        model = News
+        fields = ['title', 'author', 'content', 'is_published', 'cities', 'id']
+
+
+class NewsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = News
+        fields = ('id', 'title')

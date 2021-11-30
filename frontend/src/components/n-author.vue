@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default {
   props: {
-    author: {
+    author_id: {
       type: Number,
       default() {
         return 0
@@ -25,7 +25,7 @@ export default {
   },
   mounted() {
     axios
-        .get('http://0.0.0.0:8000/author/'+ this.author, {
+        .get('http://0.0.0.0:8000/author/'+ this.author_id, {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }

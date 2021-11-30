@@ -17,8 +17,21 @@ class CityViewSet(viewsets.ModelViewSet):
 
 
 class NewsViewSet(viewsets.ModelViewSet):
-    serializer_class = NewsSerializer
+    serializer_classes = {
+        'list': NewsListSerializer
+    }
     queryset = News.objects.all()
+
+    def get_serializer_class(self):
+        return self.serializer_classes.get(self.action, NewsSerializer)
+
+    def perform_create(self, serializer):
+        data = self.request.data
+        author = data.get('author')
+        author = Author.objects.filter(id=author).first()
+        serializer.save(author=author)
+        for city in data.get('cities'):
+            city = City.objects.filter(id=city)
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
