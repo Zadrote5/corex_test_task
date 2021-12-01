@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 
 from ..models import *
@@ -7,16 +7,19 @@ from ..serializers import *
 
 
 class CountryViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = CountrySerializer
     queryset = Country.objects.all()
 
 
 class CityViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = CitySerializer
     queryset = City.objects.all()
 
 
 class NewsViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_classes = {
         'list': NewsListSerializer
     }
@@ -43,5 +46,6 @@ class NewsViewSet(viewsets.ModelViewSet):
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()

@@ -35,7 +35,7 @@ const deleteNews = async (news: News) => {
     if (news.id) {
       const responseNews: AxiosResponse<NewsRaw> = await axios({
         method: 'delete',
-        url: `http://0.0.0.0:8000/news/${news.id}/`,
+        url: `http://9c23-178-68-38-88.ngrok.io/news/${news.id}/`,
       })
       emit('update:modelValue', false)
       let index: number = store.newsList.findIndex((el: News) => el.id === news.id)
@@ -50,7 +50,7 @@ const createNews = async () => {
   if (store.newsItem !== null) {
     const responseNews: AxiosResponse<NewsRaw> = await axios({
       method: 'post',
-      url: 'http://0.0.0.0:8000/news/',
+      url: 'http://9c23-178-68-38-88.ngrok.io/news/',
       data: store.newsItem.toJson()
     })
     store.newsItem = new News(responseNews.data)
@@ -63,7 +63,7 @@ const saveNews = async (news: News) => {
     if (news.id) {
       const responseNews: AxiosResponse<NewsRaw> = await axios({
         method: 'put',
-        url: `http://0.0.0.0:8000/news/${news.id}/`,
+        url: `http://9c23-178-68-38-88.ngrok.io/news/${news.id}/`,
         data: store.newsItem.toJson()
       })
       store.newsItem = new News(responseNews.data)
