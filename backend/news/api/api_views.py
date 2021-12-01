@@ -52,8 +52,4 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
 
 
-class UserCheck(UserViewSet):
-    permission_classes = [permissions.IsAuthenticated]
 
-    def post(self):
-        return Response(status=status.HTTP_201_CREATED)

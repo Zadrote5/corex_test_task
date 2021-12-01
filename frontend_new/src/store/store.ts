@@ -1,11 +1,13 @@
 import {reactive} from 'vue'
 
+
 export class Store {
   drawer = false
   dialog = false
   item = {
     id: 1
   }
+
   authorList: Array<Author> = []
   countryList: Array<Country> = []
   cityList: Array<City> = []
