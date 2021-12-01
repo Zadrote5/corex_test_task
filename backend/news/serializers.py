@@ -29,7 +29,7 @@ class NewsSerializer(serializers.ModelSerializer):
     content = serializers.CharField(max_length=1500)
     is_published = serializers.BooleanField(default=False)
     author = AuthorSerializer(read_only=True)
-    cities = CitySerializer(many=True)
+    cities = CitySerializer(many=True, read_only=True)
 
     class Meta:
         model = News

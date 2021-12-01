@@ -10,7 +10,7 @@ export class Store {
   countryList: Array<Country> = []
   cityList: Array<City> = []
   newsList: Array<News> = []
-
+  newsItem: News | null = null
 }
 export type AuthorRaw = {
   id: number
@@ -59,8 +59,8 @@ export class City {
 }
 
 export type NewsRaw = {
-  id: number
-  title: string,
+  id?: number
+  title?: string,
   cities?: Array<CityRaw>
   author?: Author
   content?: string
@@ -68,9 +68,9 @@ export type NewsRaw = {
 }
 
 export class News {
-  id: number
-  title: string;
-  author?: Author
+  id?: number
+  title?: string;
+  author?: Author | null
   content?: string
   is_published?: boolean
   cities?: Array<City>
@@ -79,13 +79,24 @@ export class News {
     this.title = data.title
     if (data.cities)
       this.cities = data.cities.map(val => new City(val))
-    if (data.author)
+    if (data.author) {
       this.author = data.author
+    }
     if (data.content)
       this.content = data.content
     if (data.is_published)
       this.is_published = data.is_published
+  }
 
+  toJson() {
+
+    return {
+      'title': this.title,
+      'content': this.content,
+      'is_published': this.is_published,
+      'author': this.author?.id,
+      'cities': this.cities?.map((val: City) => val.id),
+    }
   }
 
 }

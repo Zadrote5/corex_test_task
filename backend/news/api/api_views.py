@@ -29,9 +29,17 @@ class NewsViewSet(viewsets.ModelViewSet):
         data = self.request.data
         author = data.get('author')
         author = Author.objects.filter(id=author).first()
-        serializer.save(author=author)
-        for city in data.get('cities'):
-            city = City.objects.filter(id=city)
+        instance: News = serializer.save(author=author)
+        cities = City.objects.filter(id__in=data.get('cities'))
+        instance.cities.set(cities)
+
+    def perform_update(self, serializer):
+        data = self.request.data
+        author = data.get('author')
+        author = Author.objects.filter(id=author).first()
+        instance: News = serializer.save(author=author)
+        cities = City.objects.filter(id__in=data.get('cities'))
+        instance.cities.set(cities)
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
