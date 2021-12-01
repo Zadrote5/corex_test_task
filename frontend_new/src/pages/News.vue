@@ -44,7 +44,7 @@ const openDialog = async (news: News) => {
   if (news.id) {
     const responseNews: AxiosResponse<NewsRaw> = await axios({
       method: 'get',
-      url: `http://9c23-178-68-38-88.ngrok.io/news/${news.id}/`
+      url: `http://3196-178-68-38-88.ngrok.io/news/${news.id}/`
     })
     store.newsItem = new News(responseNews.data)
 
@@ -55,7 +55,7 @@ const openDialogEdit = async (news: News) => {
   if (news.id) {
     const responseNews: AxiosResponse<NewsRaw> = await axios({
       method: 'get',
-      url: `http://9c23-178-68-38-88.ngrok.io/news/${news.id}/`
+      url: `http://3196-178-68-38-88.ngrok.io/news/${news.id}/`
     })
     store.newsItem = new News(responseNews.data)
     newsDialogEdit.value = true
@@ -72,25 +72,25 @@ const loadAuthors = async () => {
 
   const responseAuthors: AxiosResponse<AuthorRaw[]> = await axios({
     method: 'get',
-    url: 'http://9c23-178-68-38-88.ngrok.io/author/'
+    url: 'http://3196-178-68-38-88.ngrok.io/author/'
   })
   store.authorList = responseAuthors.data.map((val: AuthorRaw) => new Author(val))
 
   const responseCountry: AxiosResponse<CountryRaw[]> = await axios({
     method: 'get',
-    url: 'http://9c23-178-68-38-88.ngrok.io/country/'
+    url: 'http://3196-178-68-38-88.ngrok.io/country/'
   })
   store.countryList = responseCountry.data.map((val: CountryRaw) => new Country(val))
 
   const responseCity: AxiosResponse<CityRaw[]> = await axios({
     method: 'get',
-    url: 'http://9c23-178-68-38-88.ngrok.io/city/'
+    url: 'http://3196-178-68-38-88.ngrok.io/city/'
   })
   store.cityList = responseCity.data.map((val: CityRaw) => new City(val))
 
   const responseNews: AxiosResponse<NewsRaw[]> = await axios({
     method: 'get',
-    url: 'http://9c23-178-68-38-88.ngrok.io/news/'
+    url: 'http://3196-178-68-38-88.ngrok.io/news/'
   })
   store.newsList = responseNews.data.map((val: NewsRaw) => new News(val))
 }

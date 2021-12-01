@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, permissions
+from djoser.views import UserViewSet
+from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 
 from ..models import *
@@ -49,3 +50,10 @@ class AuthorViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
+
+
+class UserCheck(UserViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self):
+        return Response(status=status.HTTP_201_CREATED)
