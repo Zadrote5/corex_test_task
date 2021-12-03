@@ -24,8 +24,10 @@
     <q-drawer
       v-model="leftDrawerOpen"
       bordered
+      class='flex column'
     >
-      <q-btn :to="{name: 'newsList'}">news</q-btn>
+      <q-btn :to="{name: 'newsList'}">News</q-btn>
+      <q-btn :to="{name: 'authorList'}">Authors</q-btn>
     </q-drawer>
 
     <q-page-container>

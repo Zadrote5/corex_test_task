@@ -15,12 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import { CountryRaw, News, NewsRaw, store } from 'src/store/store'
+import { News, NewsRaw, store } from 'src/store/store'
 import axios, { AxiosResponse } from 'axios'
 import { onMounted } from 'vue'
 import {useRoute} from 'vue-router'
 const token = localStorage.getItem('token')
-
+import {useRouter} from 'vue-router'
+const router = useRouter()
 const route = useRoute()
 
 defineProps({
@@ -35,8 +36,12 @@ const deleteNews = async () => {
       url: `http://0.0.0.0:8000/news/${store.newsItem.id}/`,
       headers: {
         Authorization: `Token ${token || ''}`
-      },
+      }
     })
+    console.log(responseNews)
+    let index = store.newsList.findIndex(el => el.id === store.newsItem.id)
+    store.newsList.splice(index, 1)
+    await router.replace({name: 'newsList'})
   }
 }
 const saveNews = async () => {
@@ -50,7 +55,7 @@ const saveNews = async () => {
         },
         data: store.newsItem.toJson()
       })
-
+      console.log(responseNews)
     }
     else {
       const responseNews: AxiosResponse<NewsRaw> = await axios({
@@ -61,10 +66,11 @@ const saveNews = async () => {
         },
         data: store.newsItem.toJson()
       })
+      console.log(responseNews)
     }
-    let index = store.newsList.findIndex(el => el.id ===store.newsItem.id)
+    let index = store.newsList.findIndex(el => el.id === store.newsItem.id)
     store.newsList[index] = store.newsItem
-
+    await router.replace({name: 'newsList'})
   }
 }
 

@@ -20,11 +20,7 @@
   const router = useRouter()
   const ready = ref(false)
   const route = useRoute()
-  import Authors from 'pages/Autors.vue'
 
-  const color = ref('bg-green')
-
-  // отправить запрос на проверку токен
 
 
   onMounted(async () => {

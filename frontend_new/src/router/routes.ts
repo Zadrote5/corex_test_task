@@ -24,7 +24,22 @@ const routes: RouteRecordRaw[] = [
         path: 'news/create',
         component: () => import('components/NewsEdit.vue'),
         name: 'newsCreate'
-      }
+      },
+      {
+        path: 'authors',
+        component: () => import('pages/Authors.vue'),
+        name: 'authorList'
+      },
+      {
+        path: 'author/:id',
+        component: () => import('components/AuthorItem.vue'),
+        name: 'authorItem'
+      },
+      {
+        path: 'author/create',
+        component: () => import('components/AuthorItem.vue'),
+        name: 'authorCreate'
+      },
 
     ]
   },

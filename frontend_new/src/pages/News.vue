@@ -6,13 +6,8 @@
       <q-card class='news bordered news-card q-mb-md flex flex-center column'
               v-for='news in $repo.newsList' v-bind:key='news.id'>
         <span class='q-mb-lg'>{{ news.title }}</span>
-        <q-btn label='Open this news' @click="openDialog(news)"></q-btn>
         <q-btn label='Edit this news' @click="$router.push('/news/'+news.id)"></q-btn>
       </q-card>
-      <q-dialog v-model='newsDialog'>
-        <NewsCard :item='currentNews'></NewsCard>
-      </q-dialog>
-
       <router-view></router-view>
     </div>
 
@@ -32,41 +27,6 @@
 </style>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import axios, { AxiosResponse } from 'axios';
-import { News, NewsRaw, store } from 'src/store/store';
-import NewsCard from 'components/NewsCard.vue'
-import NewsEdit from 'components/NewsEdit.vue'
-
-
-const currentNews = ref<News | null>(null)
-const newsDialogEdit = ref(false)
-const newsDialog = ref(false)
-const token = localStorage.getItem('token')
-
-const openDialog = async (news: News) => {
-  if (news.id) {
-    const responseNews: AxiosResponse<NewsRaw> = await axios({
-      method: 'get',
-      url: `http://0.0.0.0:8000/news/${news.id}/`,
-      headers: {
-        Authorization: `Token ${token || ''}`
-      }
-    })
-    store.newsItem = new News(responseNews.data)
-    newsDialog.value = true
-
-  }
-}
-
-
-
-
-
-
-
-
-
 
 
 
