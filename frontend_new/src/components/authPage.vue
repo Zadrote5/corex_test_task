@@ -10,14 +10,22 @@
 </template>
 
 <script lang="ts" setup>
-
 import {ref} from 'vue'
+import { authentication } from 'src/store/authentication'
+import {useRouter} from 'vue-router'
+const router = useRouter()
 
 const login = ref('')
-const password = ref('')
+const password= ref('')
 
-const singIn = () => {
-  console.log(login.value)
+const singIn = async () => {
+  await authentication.login(login.value, password.value)
+  if (authentication.user)
+    await router.replace({name: 'newsList'})
+  // void authentication.me()
+  else {
+    console.log('?????')
+  }
 }
 
 </script>

@@ -1,11 +1,13 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from djoser.views import UserViewSet
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
-
+from rest_framework.decorators import action
 from ..models import *
 from ..serializers import *
 
+User = get_user_model()
 
 class CountryViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
@@ -52,4 +54,17 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name')
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permissions = [permissions.IsAuthenticated]
+
+    @action(methods=['GET'], detail=False)
+    def me(self, request):
+        return Response(self.get_serializer(request.user).data)

@@ -7,6 +7,7 @@ router.register(r'news', NewsViewSet, basename='news')
 router.register(r'author', AuthorViewSet, basename='author')
 router.register(r'city', CityViewSet, basename='city')
 router.register(r'country', CountryViewSet, basename='country')
+router.register(r'users', UserViewSet, basename='users')
 urlpatterns = router.urls
 urlpatterns.append(
     path('auth/', include('djoser.urls'))

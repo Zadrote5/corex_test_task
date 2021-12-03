@@ -13,15 +13,16 @@ export class Store {
   cityList: Array<City> = []
   newsList: Array<News> = []
   newsItem: News | null = null
+  authorItem: Author | null = null
 }
 export type AuthorRaw = {
-  id: number
-  name: string
+  id?: number
+  name?: string
   email?: string
 }
 export class Author {
-  name: string
-  id: number
+  name?: string
+  id?: number
   email?: string
   constructor(data: AuthorRaw) {
     this.id = data.id
@@ -70,14 +71,19 @@ export type NewsRaw = {
 }
 
 export class News {
-  id?: number
+  id: number
   title?: string;
   author?: Author | null
   content?: string
   is_published?: boolean
   cities?: Array<City>
   constructor(data: NewsRaw) {
-    this.id = data.id
+    if (data.id) {
+      this.id = data.id
+    }
+    else {
+      this.id = 0
+    }
     this.title = data.title
     if (data.cities)
       this.cities = data.cities.map(val => new City(val))

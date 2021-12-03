@@ -1,7 +1,5 @@
 <template>
-  <router-view>
-
-  </router-view>
+  <router-view v-if="ready"></router-view>
 </template>
 <style>
 
@@ -16,5 +14,33 @@
 </style>
 
 <script lang="ts" setup>
+  import {ref, onMounted} from 'vue'
+  import {useRouter, useRoute} from 'vue-router'
+  import {  authentication } from 'src/store/authentication'
+  const router = useRouter()
+  const ready = ref(false)
+  const route = useRoute()
+  import Authors from 'pages/Autors.vue'
+
+  const color = ref('bg-green')
+
+  // отправить запрос на проверку токен
+
+
+  onMounted(async () => {
+    await authentication.me()
+
+    if (authentication.user && route.name === 'auth') {
+      await router.replace({
+        name: 'main'
+      })
+    } else if (!authentication.user) {
+      await router.replace({
+        name: 'auth'
+      })
+    }
+    ready.value = true
+  })
+
 
 </script>

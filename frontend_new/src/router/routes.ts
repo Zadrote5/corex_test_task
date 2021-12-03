@@ -5,14 +5,27 @@ const routes: RouteRecordRaw[] = [
 
   {
     path: '/',
+    redirect: {name: 'newsList'},
     component: () => import('pages/Index.vue'),
     name: 'main',
     children: [
       {
-        path: '/news',
+        path: 'news',
         component: () => import('pages/News.vue'),
-        name: 'newsList'
+        name: 'newsList',
+
       },
+      {
+        path: 'news/:id',
+        component: () => import('components/NewsEdit.vue'),
+        name: 'newsItem'
+      },
+      {
+        path: 'news/create',
+        component: () => import('components/NewsEdit.vue'),
+        name: 'newsCreate'
+      }
+
     ]
   },
   {
